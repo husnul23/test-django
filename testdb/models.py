@@ -1,9 +1,13 @@
 from os import name
 from django.db import models
+from django.contrib.auth import get_user_model
 
+User = get_user_model
 # Create your models here.
 
-class Teacher(models.Model):
+class Post(models.Model):
 
-    name = models.CharField(max_length=80)
-    age = models.IntegerField()
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    content = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
